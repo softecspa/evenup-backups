@@ -67,7 +67,7 @@ define backups::mysql (
   $notify_mail_server_address = undef,
   $notify_mail_server_port    = undef,
   $notify_mail_domain         = undef,
-  $notify_mail_username       = undef,
+  $notify_mail_user_name      = undef,
   $notify_mail_password       = undef,
   $notify_mail_authentication = undef,
   $notify_mail_encryption     = undef,
