@@ -48,7 +48,7 @@ define backups::mysql (
   $username     = undef,
   $password     = undef,
   $collections  = undef,
-  $skyptables   = undef,
+  $skiptables   = undef,
   $onlytables   = undef,
   $keep         = 0,
   $enable       = true,
