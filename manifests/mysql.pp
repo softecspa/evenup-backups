@@ -57,6 +57,7 @@ define backups::mysql (
   $lock                       = false,
   $oplog                      = false,
   $options                    = undef,
+
   $notify_mail_enable         = false,
   $notify_mail_success        = undef,
   $notify_mail_warning        = undef,
@@ -65,6 +66,12 @@ define backups::mysql (
   $notify_mail_from           = undef,
   $notify_mail_server_address = undef,
   $notify_mail_server_port    = undef,
+  $notify_mail_domain         = undef,
+  $notify_mail_username       = undef,
+  $notify_mail_password       = undef,
+  $notify_mail_authentication = undef,
+  $notify_mail_encryption     = undef,
+
   $notify_nagios_enable       = false,
   $notify_nagios_success      = undef,
   $notify_nagios_warning      = undef,
