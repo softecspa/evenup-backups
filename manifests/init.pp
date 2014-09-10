@@ -47,7 +47,7 @@ class backups (
 ){
 
   File {
-    require => Package['rubygem-backup'],
+    require => Package['backup'],
   }
 
   $backup_node = regsubst($::hostname, '-', '_')
@@ -62,8 +62,9 @@ class backups (
     default => $mail_to
   }
 
-  package { 'rubygem-backup':
-    ensure  => $ensure,
+  package { 'backup':
+    ensure   => $ensure,
+    provider => 'gem'
   }
 
   file { '/etc/backup':
