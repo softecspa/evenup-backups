@@ -3,8 +3,7 @@
   #
   database MySQL do |db|
     db.name = "<%= @dbname %>"
-    <% if @username -%>
-    db.username = "<%= @username %>"
+    <% if @username -%>db.username = "<%= @username %>"
     db.password = "<%= @password %>"
     <% end -%>
     db.host = "<%= @dbhost %>"
@@ -13,7 +12,7 @@
     db.socket = "<%= @socket %>"
     <% end -%>
     <% if @skiptables -%>
-      db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
+db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
     <% end -%>
     <% if @onlytables -%>
       db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
