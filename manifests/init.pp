@@ -26,6 +26,7 @@ class backups (
   $ensure         = 'latest',
   $password       = '',
   $enable_mail    = false,
+  $enable_nagios  = false,
   $enable_hc      = false,
   $logstash       = false,
   # Mail Config
@@ -37,6 +38,12 @@ class backups (
   $mail_address   = 'localhost',
   $mail_port      = '25',
   $mail_domain    = $::domain,
+  # Nagios Confir
+  $nagios_success = true,
+  $nagios_warning = true,
+  $nagios_failure = true,
+  $nagios_host    = undef,
+  $nagios_port    = '5667',
   # Hipchat Config
   $hc_success     = false,
   $hc_warning     = true,

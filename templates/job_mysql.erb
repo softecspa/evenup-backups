@@ -16,9 +16,9 @@
     db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
 <% end -%>
 <% if @onlytables -%>
-db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
+    db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
 <% end -%>
 <% if @options -%>
-db.additional_options = [<% @options.each do |option| -%>"<%= option -%>",<% end -%>]
+    db.additional_options = [<% @options.each do |option| -%>"<%= option -%>",<% end -%>]
 <% end -%>
   end
