@@ -20,5 +20,4 @@ db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
     <% end -%>
     <% if @options -%>
 db.additional_options = [<% @options.each do |option| -%>"<%= option -%>",<% end -%>]
-    <% end -%>
-  end
+    <% end -%>end
