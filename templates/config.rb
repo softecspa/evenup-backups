@@ -31,13 +31,13 @@
 
 <% if scope.lookupvar('backups::enable_nagios') -%>
   Notifier::Nagios.defaults do |nagios|
-    nagios.on_success   = <%= scope.lookupvar('backups::nagios_success') -%>
-    nagios.on_warning   = <%= scope.lookupvar('backups::nagios_warning') -%>
-    nagios.on_failure   = <%= scope.lookupvar('backups::nagios_failure') -%>
+    nagios.on_success   = <%= scope.lookupvar('backups::nagios_success') %>
+    nagios.on_warning   = <%= scope.lookupvar('backups::nagios_warning') %>
+    nagios.on_failure   = <%= scope.lookupvar('backups::nagios_failure') %>
 <% if scope.lookupvar('backups::nagios_host') -%>
-    nagios.nagios_host  = '<%= scope.lookupvar('backups::nagios_host') -%>'
+    nagios.nagios_host  = '<%= scope.lookupvar('backups::nagios_host') %>'
 <% end -%>
-    nagios.nagios_port  = '<%= scope.lookupvar('backups::nagios_port') -%>'
+    nagios.nagios_port  = '<%= scope.lookupvar('backups::nagios_port') %>'
   end
 <% end -%>
 
