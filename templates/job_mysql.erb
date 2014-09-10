@@ -7,18 +7,18 @@
     db.username = "<%= @username -%>"
     db.password = "<%= @password -%>"
 <% end -%>
-    db.host = "<%= @dbhost %>"
-    db.port = "<%= @port %>"
-    <% if @socket -%>
-    db.socket = "<%= @socket %>"
-    <% end %>
-    <% if @skiptables %>
+    db.host = "<%= @dbhost -%>"
+    db.port = "<%= @port -%>"
+<% if @socket -%>
+    db.socket = "<%= @socket -%>"
+<% end -%>
+<% if @skiptables -%>
     db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
-    <% end -%>
-    <% if @onlytables -%>
+<% end -%>
+<% if @onlytables -%>
 db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
-    <% end -%>
-    <% if @options -%>
+<% end -%>
+<% if @options -%>
 db.additional_options = [<% @options.each do |option| -%>"<%= option -%>",<% end -%>]
-    <% end -%>
+<% end -%>
   end
