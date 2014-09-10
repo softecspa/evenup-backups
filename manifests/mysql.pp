@@ -1,6 +1,6 @@
 # == Define: backups::mysql
 #
-# This define will create a backup job for a mongodb node or mongodb dev instance.
+# This define will create a backup job for a mysql node or mysql dev instance.
 #
 # === Parameters
 #
@@ -39,7 +39,7 @@
 #
 # Copyright 2014 Softec spa
 #
-define backups::mongodb (
+define backups::mysql (
   $hour,
   $minute,
   $dbname,
