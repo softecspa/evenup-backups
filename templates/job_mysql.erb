@@ -9,11 +9,11 @@ db.username = "<%= @username %>"
     <% end -%>
     db.host = "<%= @dbhost %>"
     db.port = "<%= @port %>"
-    <% if @socket -%>
-db.socket = "<%= @socket %>"
+    <% if @socket %>
+    db.socket = "<%= @socket %>"
     <% end -%>
-    <% if @skiptables -%>
-db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
+    <% if @skiptables %>
+    db.skip_tables = [<% @skiptables.each do |table| -%>"<%= table -%>",<% end -%>]
     <% end -%>
     <% if @onlytables -%>
 db.only_tables = [<% @onlytables.each do |table| -%>"<%= table -%>",<% end -%>]
