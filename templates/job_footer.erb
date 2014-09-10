@@ -50,4 +50,30 @@
     hipchat.rooms_notified = '<%= scope.lookupvar('backups::hc_notify') %>' 
   end
 <% end -%>
+
+<% if @notify_nagios_enable -%>
+  notify_by Nagios do |nagios|
+<% if @notify_nagios_success -%>
+    nagios.on_success = <%= @notify_nagios_success %>
+<% end -%>
+<% if @notify_nagios_success -%>
+    nagios.on_warning = <%= @notify_nagios_warning %>
+<% end -%>
+<% if @notify_nagios_warning -%>
+    nagios.on_warning = <%= @notify_nagios_warning %>
+<% end -%>
+<% if @notify_nagios_failure -%>
+    nagios.on_warning = <%= @notify_nagios_failure %>
+<% end -%>
+<% if @notify_nagios_host -%>
+    nagios.nagios_host = '<%= @notify_nagios_host %>'
+<% end -%>
+<% if @notify_nagios_port -%>
+    nagios.nagios_port = '<%= @notify_nagios_port %>'
+<% end -%>
+    nagios.service_host = '<%= @notify_nagios_service_host %>'
+    nagios.service_name = '<%= @notify_nagios_service_name %>'
+  end
+<% end -%>
+
 end
