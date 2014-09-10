@@ -3,9 +3,9 @@
   #
   database MySQL do |db|
     db.name = "<%= @dbname %>"
-    <% if @username %>
-    db.username = "<%= @username %>"
-    db.password = "<%= @password %>"
+    <% if @username -%>
+    db.username = "<%= @username -%>"
+    db.password = "<%= @password -%>"
     <% end -%>
     db.host = "<%= @dbhost %>"
     db.port = "<%= @port %>"
