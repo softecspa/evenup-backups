@@ -3,10 +3,10 @@
   #
   database MySQL do |db|
     db.name = "<%= @dbname %>"
-    <% if @username -%>
+<% if @username -%>
     db.username = "<%= @username -%>"
     db.password = "<%= @password -%>"
-    <% end -%>
+<% end -%>
     db.host = "<%= @dbhost %>"
     db.port = "<%= @port %>"
     <% if @socket -%>
