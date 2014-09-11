@@ -20,6 +20,9 @@
    s3.region            = "<%= @aws_region %>"
    s3.bucket            = "<%= @bucket %>"
    s3.keep              = 10
+   s3.fog_options       = {
+     :path_style => true,
+   }
  end
 
  <% if @password != '' -%>
