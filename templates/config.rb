@@ -1,5 +1,6 @@
 # encoding: utf-8
-
+# Backup v4.x Configuration
+#
 ##
 #
 # View the Git repository at https://github.com/meskyanichi/backup
