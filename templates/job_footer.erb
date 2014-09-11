@@ -75,4 +75,49 @@
     nagios.service_name = '<%= @notify_nagios_service_name %>'
   end
 <% end -%>
+
+<% if @notify_mail_enable -%>
+<% if @mail_config_override -%>
+  notify_by Mail do |mail|
+<% if @notify_mail_success -%>
+    mail.on_success = <%= @notify_mail_success %>
+<% end -%>
+<% if @notify_mail_warning -%>
+    mail.on_warning = <%= @notify_mail_warning %>
+<% end -%>
+<% if @notify_mail_failure -%>
+    mail.on_failure = <%= @notify_mail_failure %>
+<% end -%>
+<% if @notify_mail_to -%>
+    mail.to = <%= @notify_mail_to %>
+<% end -%>
+<% if @notify_mail_from -%>
+    mail.from = <%= @notify_mail_from %>
+<% end -%>
+<% if @notify_mail_server_address -%>
+    mail.address = <%= @notify_mail_server_address %>
+<% end -%>
+<% if @notify_mail_server_port -%>
+    mail.port = <%= @notify_mail_server_address %>
+<% end -%>
+<% if @notify_mail_domain -%>
+    mail.domain = <%= @notify_mail_domain %>
+<% end -%>
+<% if @notify_mail_user_name -%>
+    mail.user_name = <%= @notify_mail_user_name %>
+<% end -%>
+<% if @notify_mail_password -%>
+    mail.password = <%= @notify_mail_password %>
+<% end -%>
+<% if @notify_mail_authentication -%>
+    mail.authentication = <%= @notify_mail_authentication %>
+<% end -%>
+<% if @notify_mail_encryption -%>
+    mail.encryption = <%= @notify_mail_encryption %>
+<% end -%>
+  end
+<% else -%>
+  notify_by Mail
+<% end -%>
+<% end -%>
 end

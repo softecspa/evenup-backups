@@ -38,7 +38,7 @@ class backups (
   $mail_address   = 'localhost',
   $mail_port      = '25',
   $mail_domain    = $::domain,
-  # Nagios Confir
+  # Nagios Config
   $nagios_success = true,
   $nagios_warning = true,
   $nagios_failure = true,

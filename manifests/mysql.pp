@@ -98,6 +98,24 @@ define backups::mysql (
     default => 'absent',
   }
 
+  # check if at least one of mail params is defined
+  if $notify_mail_success or
+  $notify_mail_warning or
+  $notify_mail_failure or
+  $notify_mail_to or
+  $notify_mail_from or
+  $notify_mail_server_address or
+  $notify_mail_server_port or
+  $notify_mail_domain or
+  $notify_mail_user_name or
+  $notify_mail_password or
+  $notify_mail_authentication or
+  $notify_mail_encryption {
+    $mail_config_override = true
+  } else {
+    $mail_config_override = false
+  }
+
   file { "/etc/backup/models/${name}.rb":
     owner   => 'root',
     group   => 'root',
