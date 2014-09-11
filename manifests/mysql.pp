@@ -82,6 +82,14 @@ define backups::mysql (
   $notify_nagios_service_name = undef,
 ){
 
+  if $notify_nagios_enable and !$backups::enable_nagios {
+    fail('backups::mysql::notify_nagios_enable is true but backups::enable_nagios is set to false.')
+  }
+
+  if $notify_mail_enable and !$backups::enable_mail {
+    fail('backups::mysql::notify_mail_enable is true but backups::enable_mail is set to false.')
+  }
+
   if $notify_nagios_enable and !$notify_nagios_service_name {
     fail('if notify_nagios_enable is true notify_nagios_service_name must be set')
   }
