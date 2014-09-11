@@ -53,16 +53,16 @@
    mail.port                 = <%= @mail_port %>
    mail.domain               = '<%= @mail_domain %>'
 <% if @mail_user_name -%>
-   mail.user_name  = '<%= @mail_user_name %>'
+   mail.user_name            = '<%= @mail_user_name %>'
 <% end -%>
 <% if @mail_password -%>
-   mail.password  = '<%= @mail_password %>'
+   mail.password             = '<%= @mail_password %>'
 <% end -%>
 <% if @mail_authentication -%>
-   mail.authentication  = '<%= @mail_authentication %>'
+   mail.authentication       = '<%= @mail_authentication %>'
 <% end -%>
 <% if @mail_encryption -%>
-   mail.encryption  = '<%= @mail_encryption %>'
+   mail.encryption           = '<%= @mail_encryption %>'
 <% end -%>
  end
 <% end -%>
