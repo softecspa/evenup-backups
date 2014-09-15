@@ -43,6 +43,9 @@ define backups::mysql (
   $hour,
   $minute,
   $dbname,
+  $monthday                   = '*',
+  $month                      = '*',
+  $weekday                    = '*',
   $dbhost                     = 'localhost',
   $dbsocket                   = undef, 
   $username                   = undef,
@@ -57,27 +60,13 @@ define backups::mysql (
   $lock                       = false,
   $oplog                      = false,
   $options                    = undef,
-
+  # notification
   $notify_mail_enable         = false,
+  $notify_nagios_enable       = false,
+  #override config for notification
   $notify_mail_success        = undef,
   $notify_mail_warning        = undef,
   $notify_mail_failure        = undef,
-  $notify_mail_to             = undef,
-  $notify_mail_from           = undef,
-  $notify_mail_server_address = undef,
-  $notify_mail_server_port    = undef,
-  $notify_mail_domain         = undef,
-  $notify_mail_user_name      = undef,
-  $notify_mail_password       = undef,
-  $notify_mail_authentication = undef,
-  $notify_mail_encryption     = undef,
-
-  $notify_nagios_enable       = false,
-  $notify_nagios_success      = undef,
-  $notify_nagios_warning      = undef,
-  $notify_nagios_failure      = undef,
-  $notify_nagios_host         = undef,
-  $notify_nagios_port         = undef,
   $notify_nagios_service_host = undef,
   $notify_nagios_service_name = undef,
 ){
@@ -106,19 +95,7 @@ define backups::mysql (
     default => 'absent',
   }
 
-  # check if at least one of mail params is defined
-  if $notify_mail_success or
-  $notify_mail_warning or
-  $notify_mail_failure or
-  $notify_mail_to or
-  $notify_mail_from or
-  $notify_mail_server_address or
-  $notify_mail_server_port or
-  $notify_mail_domain or
-  $notify_mail_user_name or
-  $notify_mail_password or
-  $notify_mail_authentication or
-  $notify_mail_encryption {
+  if  $notify_mail_success or  $notify_mail_warning or  $notify_mail_failure {
     $mail_config_override = true
   } else {
     $mail_config_override = false
@@ -143,11 +120,14 @@ define backups::mysql (
   }
 
   cron { "mysql_${name}":
-    ensure  => $cron_ensure,
-    command => "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
-    user    => 'root',
-    hour    => $hour,
-    minute  => $minute;
+    ensure   => $cron_ensure,
+    command  => "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
+    user     => 'root',
+    hour     => $hour,
+    minute   => $minute,
+    monthday => $monthday,
+    month    => $month,
+    weekday  => $weekday,
   }
 
 }

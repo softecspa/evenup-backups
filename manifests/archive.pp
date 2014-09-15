@@ -41,9 +41,21 @@ define backups::archive(
   $path,
   $hour,
   $minute,
-  $exclude  = '',
-  $keep     = 0,
-  $tmp_path = '/tmp',
+  $monthday                   = '*',
+  $month                      = '*',
+  $weekday                    = '*',
+  $exclude                    = '',
+  $keep                       = 0,
+  $tmp_path                   = '/tmp',
+  # notification
+  $notify_mail_enable         = false,
+  $notify_nagios_enable       = false,
+  #override notifications config
+  $notify_mail_success        = undef,
+  $notify_mail_warning        = undef,
+  $notify_mail_failure        = undef,
+  $notify_nagios_service_host = undef,
+  $notify_nagios_service_name = undef,
 ){
 
   include backups
@@ -52,6 +64,12 @@ define backups::archive(
 
   $bad_chars = '\.\\\/-'
   $name_real = regsubst($name, "[${bad_chars}]", '_', 'G')
+
+  if $notify_mail_success or  $notify_mail_warning or  $notify_mail_failure {
+    $mail_config_override = true
+  } else {
+    $mail_config_override = false
+  }
 
   file { "/etc/backup/models/${name}.rb":
     owner   => 'root',
@@ -72,10 +90,13 @@ define backups::archive(
   }
 
   cron { "archive_${name}":
-    ensure  => $cron_ensure,
-    command => "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
-    user    => 'root',
-    hour    => $hour,
-    minute  => $minute;
+    ensure   => $cron_ensure,
+    command  => "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
+    user     => 'root',
+    hour     => $hour,
+    minute   => $minute,
+    monthday => $monthday,
+    month    => $month,
+    weekday  => $weekday,
   }
 }

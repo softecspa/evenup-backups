@@ -25,6 +25,17 @@
    }
  end
 
+ Syncer::Cloud::S3.defaults do |s3|
+   s3.access_key_id     = "<%= @aws_access_key %>"
+   s3.secret_access_key = "<%= @aws_secret_key %>"
+   s3.region            = "<%= @aws_region %>"
+   s3.bucket            = "<%= @bucket %>"
+   s3.fog_options       = {
+     :path_style => true,
+   }
+
+ end
+
  <% if @password != '' -%>
  Backup::Encryptor::OpenSSL.defaults do |encryption|
    encryption.password = "<%= @password %>"
