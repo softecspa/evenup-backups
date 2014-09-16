@@ -75,7 +75,8 @@ class backups (
 
   package { 'backup':
     ensure   => $ensure,
-    provider => 'gem'
+    provider => 'gem',
+    require  => Package['ruby1.9.3']
   }
 
   file { '/etc/backup':
