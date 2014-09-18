@@ -46,6 +46,7 @@ define backups::mysql (
   $monthday                   = '*',
   $month                      = '*',
   $weekday                    = '*',
+  $cron_prepend               = undef,
   $dbhost                     = 'localhost',
   $dbsocket                   = undef, 
   $username                   = undef,
@@ -119,9 +120,18 @@ define backups::mysql (
     default => "--tmp-path ${tmp_path}"
   }
 
+  $backup_command = "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet"
+  
+  $prepend = $cron_prepend?{
+    undef   => '',
+    default => "${cron_prepend} && " 
+  }
+
+  $cron_command = "${prepend}${backup_command}"
+
   cron { "mysql_${name}":
     ensure   => $cron_ensure,
-    command  => "/usr/local/bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
+    command  => $cron_command,
     user     => 'root',
     hour     => $hour,
     minute   => $minute,
