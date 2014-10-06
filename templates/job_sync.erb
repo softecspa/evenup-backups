@@ -2,7 +2,7 @@
   # Sync S3
   #
   sync_with Cloud::S3 do |s3|
-    s3.path         = '<%= @s3_path %>'
+    s3.path         = '<%= @fqdn -%>/<%= @s3_path %>'
     s3.mirror       = <%= @mirror %>
     s3.thread_count = <%= @thread_count %>
     s3.directories do |directory|
