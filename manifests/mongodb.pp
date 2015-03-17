@@ -40,9 +40,10 @@
 # Copyright 2013 Bashton Ltd
 #
 define backups::mongodb (
-  $hour,
-  $minute,
   $dbname,
+  $hour        = undef,
+  $minute      = undef,
+  $cron_special= undef,
   $dbhost      = 'localhost',
   $username    = undef,
   $password    = undef,
@@ -85,12 +86,20 @@ define backups::mongodb (
     default => "--tmp-path ${tmp_path}"
   }
 
-  cron { "mongodb_${name}":
-    ensure  => $cron_ensure,
-    command => "cd /opt/backup ; ./bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
-    user    => 'root',
-    hour    => $hour,
-    minute  => $minute;
+  if $special {
+    cron { "mongodb_${name}":
+      ensure  => $cron_ensure,
+      command => "cd /opt/backup ; ./bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
+      user    => 'root',
+      special => $cron_special,
+    }
+  } else {
+    cron { "mongodb_${name}":
+      ensure  => $cron_ensure,
+      command => "cd /opt/backup ; ./bin/backup perform --trigger ${name_real} -c /etc/backup/config.rb -l /var/log/backup/ ${tmp} --quiet",
+      user    => 'root',
+      hour    => $hour,
+      minute  => $minute;
+    }
   }
-
 }
