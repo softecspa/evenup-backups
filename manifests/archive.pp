@@ -39,11 +39,12 @@
 #
 define backups::archive(
   $path,
-  $hour,
-  $minute,
+  $hour                       = undef,
+  $minute                     = undef,
   $monthday                   = '*',
   $month                      = '*',
   $weekday                    = '*',
+  $cron_special               = undef,
   $cron_prepend               = undef,
   $exclude                    = '',
   $keep                       = 0,
@@ -99,14 +100,23 @@ define backups::archive(
 
   $cron_command = "${prepend}${backup_command}"
 
-  cron { "archive_${name}":
-    ensure   => $cron_ensure,
-    command  => $cron_command,
-    user     => 'root',
-    hour     => $hour,
-    minute   => $minute,
-    monthday => $monthday,
-    month    => $month,
-    weekday  => $weekday,
+  if $cron_special {
+    cron { "archive_${name}":
+      ensure        => $cron_ensure,
+      command       => $cron_command,
+      user          => 'root',
+      cron_special  => $cron_special,
+    }
+  } else {
+    cron { "archive_${name}":
+      ensure   => $cron_ensure,
+      command  => $cron_command,
+      user     => 'root',
+      hour     => $hour,
+      minute   => $minute,
+      monthday => $monthday,
+      month    => $month,
+      weekday  => $weekday,
+    }
   }
 }
