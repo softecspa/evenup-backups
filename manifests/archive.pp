@@ -105,7 +105,7 @@ define backups::archive(
       ensure        => $cron_ensure,
       command       => $cron_command,
       user          => 'root',
-      cron_special  => $cron_special,
+      special       => $cron_special,
     }
   } else {
     cron { "archive_${name}":
